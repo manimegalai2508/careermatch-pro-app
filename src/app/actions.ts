@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 
 const resumeSchema = z.object({
-  resume: z.string().min(100, "Resume text must be at least 100 characters."),
+  resume: z.string().min(1, "Please upload a resume file."),
 });
 
 export async function analyzeResumeAction(prevState: any, formData: FormData) {
@@ -22,7 +22,7 @@ export async function analyzeResumeAction(prevState: any, formData: FormData) {
   }
 
   try {
-    const analysis = await analyzeResume({ resumeText: validatedFields.data.resume });
+    const analysis = await analyzeResume({ resumeDataUri: validatedFields.data.resume });
     return { data: analysis };
   } catch (error) {
     console.error(error);

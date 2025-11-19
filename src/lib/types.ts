@@ -19,7 +19,7 @@ export type Candidate = {
   skills: string[];
   experienceYears: number;
   location: string;
-  resume: string;
+  resume: string; // This can be resume text or a data URI
 };
 
 export type CandidateRanking = z.infer<

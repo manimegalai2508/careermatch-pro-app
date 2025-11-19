@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Logo } from "@/components/logo";
-import { Home, Briefcase, BarChart3, BotMessageSquare, FileText, Search, Settings, LifeBuoy, LogOut } from "lucide-react";
+import { LifeBuoy, LogOut, Settings, User as UserIcon } from "lucide-react";
 import Link from "next/link";
 import { SidebarNav } from "@/components/dashboard/sidebar-nav";
 
@@ -31,7 +31,6 @@ const UserNav = () => (
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" className="relative h-8 w-8 rounded-full">
         <Avatar className="h-8 w-8">
-          <AvatarImage src="https://i.pravatar.cc/150?u=user" alt="User" />
           <AvatarFallback>U</AvatarFallback>
         </Avatar>
       </Button>
