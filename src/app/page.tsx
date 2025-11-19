@@ -16,7 +16,7 @@ export default function Home() {
               <Link href="/login">Sign In</Link>
             </Button>
             <Button asChild>
-              <Link href="/login">Sign Up</Link>
+              <Link href="/signup">Sign Up</Link>
             </Button>
           </nav>
         </div>
@@ -34,7 +34,7 @@ export default function Home() {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Button size="lg" asChild>
-                  <Link href="/login">
+                  <Link href="/signup">
                     Get Started <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
