@@ -66,7 +66,7 @@ export const columns: ColumnDef<Job>[] = [
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem>Edit</DropdownMenuItem>
                 <DropdownMenuItem>Archive</DropdownMenuItem>
-                <DropdownMenuItem className="text-red-500">Delete</DropdownMenuItem>
+                <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
