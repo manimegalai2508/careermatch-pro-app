@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import {
   Avatar,
   AvatarFallback,
-  AvatarImage,
 } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -22,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Logo } from "@/components/logo";
-import { LifeBuoy, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { LifeBuoy, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
 import { SidebarNav } from "@/components/dashboard/sidebar-nav";
 

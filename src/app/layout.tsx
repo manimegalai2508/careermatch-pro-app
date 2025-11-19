@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,7 @@ const fontBody = Inter({
   variable: "--font-body" 
 });
 
-const fontHeadline = Poppins({
+const fontHeadline = Inter({
   subsets: ['latin'],
   weight: ['600', '700', '800'],
   variable: '--font-headline',

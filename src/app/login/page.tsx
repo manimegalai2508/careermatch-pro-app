@@ -54,7 +54,7 @@ export default function LoginPage() {
               </div>
             </div>
             {/* In a real app, this would be a form with a submit handler */}
-            <form action="/dashboard" className="grid gap-4">
+            <form className="grid gap-4">
                 <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" placeholder="m@example.com" required />
@@ -68,8 +68,8 @@ export default function LoginPage() {
                 </div>
                 <Input id="password" type="password" required />
                 </div>
-                <Button type="submit" className="w-full">
-                    Sign In
+                <Button type="submit" className="w-full" asChild>
+                  <Link href="/dashboard">Sign In</Link>
                 </Button>
             </form>
           <div className="mt-4 text-center text-sm">

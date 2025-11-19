@@ -29,28 +29,39 @@ const candidateNav = [
 const recruiterNav = [
     { name: "Dashboard", href: "/dashboard/recruiter", icon: Home },
     { name: "Job Postings", href: "/dashboard/recruiter/jobs", icon: Briefcase },
-    { name: "Candidates", href: "/dashboard/recruiter/jobs", icon: Users },
     { name: "Market Insights", href: "/dashboard/market-insights", icon: BarChart3 },
 ];
 
 export function SidebarNav() {
     const pathname = usePathname();
     // In a real app, role would come from user session
-    const [role, setRole] = useState('candidate');
+    const [role, setRole] = useState('candidate'); 
 
-    const navItems = role === 'candidate' ? candidateNav : recruiterNav;
+    const isRecruiterView = role === 'recruiter';
+    const navItems = isRecruiterView ? recruiterNav : candidateNav;
 
+    // Determine which accordion item should be open based on the current role
+    const openAccordionItem = isRecruiterView ? 'recruiter-view' : 'candidate-view';
+
+    const handleRoleChange = (value: string) => {
+        if (value === 'candidate-view') {
+            setRole('candidate');
+        } else if (value === 'recruiter-view') {
+            setRole('recruiter');
+        }
+    };
+    
     return (
         <div className="flex flex-col h-full">
             <div className="p-2">
-                 <Accordion type="single" collapsible defaultValue="item-1" onValueChange={(val) => setRole(val === 'item-1' ? 'candidate' : 'recruiter')}>
-                    <AccordionItem value="item-1" className="border-none">
+                 <Accordion type="single" collapsible defaultValue={openAccordionItem} onValueChange={handleRoleChange}>
+                    <AccordionItem value="candidate-view" className="border-none">
                         <AccordionTrigger className="text-lg font-semibold hover:no-underline p-2 rounded-md hover:bg-sidebar-accent">Candidate View</AccordionTrigger>
                         <AccordionContent>
                            <p className="text-sm text-muted-foreground p-2">Use AI-powered tools to find your next job and advance your career.</p>
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="item-2" className="border-none">
+                    <AccordionItem value="recruiter-view" className="border-none">
                         <AccordionTrigger className="text-lg font-semibold hover:no-underline p-2 rounded-md hover:bg-sidebar-accent">Recruiter View</AccordionTrigger>
                         <AccordionContent>
                             <p className="text-sm text-muted-foreground p-2">Find and hire the best talent with our smart recruiting dashboard.</p>
@@ -64,14 +75,12 @@ export function SidebarNav() {
                 <SidebarMenu>
                     {navItems.map((item) => (
                         <SidebarMenuItem key={item.name}>
-                            <Link href={item.href} passHref>
-                                <SidebarMenuButton asChild isActive={pathname === item.href} tooltip={item.name}>
-                                    <span>
-                                        <item.icon />
-                                        <span>{item.name}</span>
-                                    </span>
-                                </SidebarMenuButton>
-                            </Link>
+                            <SidebarMenuButton asChild isActive={pathname === item.href} tooltip={item.name}>
+                                <Link href={item.href}>
+                                    <item.icon />
+                                    <span>{item.name}</span>
+                                </Link>
+                            </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}
                 </SidebarMenu>
