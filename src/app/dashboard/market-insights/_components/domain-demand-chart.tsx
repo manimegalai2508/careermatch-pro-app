@@ -1,7 +1,7 @@
 'use client';
 
 import { Pie, PieChart, ResponsiveContainer, Tooltip, Cell, Legend } from 'recharts';
-import { ChartTooltipContent } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 
 const chartData = [
   { domain: 'FinTech', demand: 27, fill: 'hsl(var(--chart-1))' },
@@ -11,10 +11,35 @@ const chartData = [
   { domain: 'AI/ML', demand: 35, fill: 'hsl(var(--chart-5))' },
 ];
 
+const chartConfig = {
+    demand: {
+      label: 'Demand',
+    },
+    FinTech: {
+      label: 'FinTech',
+      color: 'hsl(var(--chart-1))',
+    },
+    Healthcare: {
+      label: 'Healthcare',
+      color: 'hsl(var(--chart-2))',
+    },
+    SaaS: {
+      label: 'SaaS',
+      color: 'hsl(var(--chart-3))',
+    },
+    'E-commerce': {
+      label: 'E-commerce',
+      color: 'hsl(var(--chart-4))',
+    },
+    'AI/ML': {
+      label: 'AI/ML',
+      color: 'hsl(var(--chart-5))',
+    },
+  };
+
 export function DomainDemandChart() {
   return (
-    <div className="h-[350px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
+    <ChartContainer config={chartConfig} className="h-[350px] w-full">
         <PieChart>
           <Tooltip content={<ChartTooltipContent />} />
           <Pie
@@ -58,7 +83,6 @@ export function DomainDemandChart() {
             ))}
           </Pie>
         </PieChart>
-      </ResponsiveContainer>
-    </div>
+    </ChartContainer>
   );
 }

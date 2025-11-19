@@ -1,7 +1,7 @@
 'use client';
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { ChartTooltipContent } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 
 const chartData = [
   { skill: 'Python', demand: 98 },
@@ -14,21 +14,26 @@ const chartData = [
   { skill: 'AGI', demand: 65 },
 ];
 
+const chartConfig = {
+  demand: {
+    label: "Demand",
+    color: "hsl(var(--primary))",
+  },
+};
+
 export function TrendingSkillsChart() {
   return (
-    <div className="h-[350px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
-                <XAxis dataKey="skill" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                <Tooltip
-                    cursor={{ fill: 'hsl(var(--muted))' }}
-                    content={<ChartTooltipContent />}
-                />
-                <Bar dataKey="demand" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-            </BarChart>
-        </ResponsiveContainer>
-    </div>
+    <ChartContainer config={chartConfig} className="h-[350px] w-full">
+      <BarChart data={chartData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
+          <XAxis dataKey="skill" stroke="hsl(var(--muted-foreground))" fontSize={12} />
+          <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+          <Tooltip
+              cursor={{ fill: 'hsl(var(--muted))' }}
+              content={<ChartTooltipContent />}
+          />
+          <Bar dataKey="demand" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+      </BarChart>
+    </ChartContainer>
   );
 }

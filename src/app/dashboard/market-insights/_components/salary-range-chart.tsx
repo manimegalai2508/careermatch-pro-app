@@ -1,7 +1,7 @@
 'use client';
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { ChartTooltipContent } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 
 const chartData = [
   { experience: '0-2', salary: [60000, 85000] },
@@ -11,10 +11,16 @@ const chartData = [
   { experience: '10+', salary: [180000, 250000] },
 ];
 
+const chartConfig = {
+    salary: {
+        label: "Salary",
+        color: "hsl(var(--primary))",
+    },
+};
+
 export function SalaryRangeChart() {
   return (
-    <div className="h-[350px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
+    <ChartContainer config={chartConfig} className="h-[350px] w-full">
         <AreaChart data={chartData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
           <XAxis dataKey="experience" stroke="hsl(var(--muted-foreground))" fontSize={12} />
@@ -46,7 +52,6 @@ export function SalaryRangeChart() {
           </defs>
           <Area type="monotone" dataKey="salary" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorSalary)" />
         </AreaChart>
-      </ResponsiveContainer>
-    </div>
+    </ChartContainer>
   );
 }
