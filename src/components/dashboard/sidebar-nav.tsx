@@ -29,7 +29,7 @@ const candidateNav = [
 const recruiterNav = [
     { name: "Dashboard", href: "/dashboard/recruiter", icon: Home },
     { name: "Job Postings", href: "/dashboard/recruiter/jobs", icon: Briefcase },
-    { name: "Candidates", href: "/dashboard/recruiter/candidates", icon: Users },
+    { name: "Candidates", href: "/dashboard/recruiter/jobs", icon: Users },
     { name: "Market Insights", href: "/dashboard/market-insights", icon: BarChart3 },
 ];
 
@@ -64,12 +64,14 @@ export function SidebarNav() {
                 <SidebarMenu>
                     {navItems.map((item) => (
                         <SidebarMenuItem key={item.name}>
-                            <SidebarMenuButton asChild isActive={pathname === item.href} tooltip={item.name}>
-                                <Link href={item.href}>
-                                    <item.icon />
-                                    <span>{item.name}</span>
-                                </Link>
-                            </SidebarMenuButton>
+                            <Link href={item.href} passHref>
+                                <SidebarMenuButton asChild isActive={pathname === item.href} tooltip={item.name}>
+                                    <span>
+                                        <item.icon />
+                                        <span>{item.name}</span>
+                                    </span>
+                                </SidebarMenuButton>
+                            </Link>
                         </SidebarMenuItem>
                     ))}
                 </SidebarMenu>

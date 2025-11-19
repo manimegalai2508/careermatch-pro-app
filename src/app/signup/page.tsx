@@ -17,7 +17,8 @@ export default function SignupPage() {
           <CardDescription>Enter your information to get started</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4">
+          {/* In a real app, this would be a form with a submit handler */}
+          <form action="/dashboard" className="grid gap-4">
              <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="first-name">First name</Label>
@@ -36,10 +37,10 @@ export default function SignupPage() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" required />
             </div>
-            <Button type="submit" className="w-full" asChild>
-                <Link href="/dashboard">Create Account</Link>
+            <Button type="submit" className="w-full">
+              Create Account
             </Button>
-          </div>
+          </form>
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
             <Link href="/login" className="underline">
