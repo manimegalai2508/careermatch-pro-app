@@ -70,7 +70,7 @@ export function CareerPathClient() {
       <CardHeader>
         <CardTitle className="font-headline">Your Profile</CardTitle>
         <CardDescription>
-          Provide your current skills and a brief summary of your work experience.
+          Provide your current skills and a brief summary of your work experience (optional for freshers).
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -80,7 +80,7 @@ export function CareerPathClient() {
             <Input id="currentSkills" name="currentSkills" placeholder="e.g., React, Python, Product Management" />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="experience">Experience Summary</Label>
+            <Label htmlFor="experience">Experience Summary (Optional)</Label>
             <Textarea id="experience" name="experience" placeholder="Describe your work experience..." />
           </div>
           <SubmitButton />

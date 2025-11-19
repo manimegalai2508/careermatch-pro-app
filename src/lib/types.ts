@@ -31,3 +31,18 @@ export type ResumeAnalysis = z.infer<z.output<typeof analyzeResume>>;
 export type CareerPathSuggestion = z.infer<
   z.output<typeof getPersonalizedCareerPathSuggestions>
 >;
+
+// Adding a new type for the mocked match breakdown
+export type MatchBreakdown = {
+    skills: { score: number; explanation: string };
+    experience: { score: number; explanation: string };
+    location: { score: number; explanation: string };
+    extractionConfidence: { score: number; explanation: string };
+    missingSkills: { skill: string; impact: string }[];
+};
+
+export type JobWithMatch = Job & {
+    matchScore: number;
+    breakdown: MatchBreakdown;
+    interviewQuestions: string[];
+};

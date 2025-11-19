@@ -14,10 +14,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { PlusCircle, Loader2 } from "lucide-react";
+import { PlusCircle, Loader2, Terminal } from "lucide-react";
 import { createJobAction } from '@/app/actions';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -32,7 +33,8 @@ function SubmitButton() {
 export function PostJobDialog() {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
-  const initialState = { message: null };
+  const formRef = useRef<HTMLFormElement>(null);
+  const initialState = { message: null, errors: null };
   const [state, formAction] = useFormState(createJobAction, initialState);
 
   useEffect(() => {
@@ -42,6 +44,7 @@ export function PostJobDialog() {
         description: state.message,
       });
       setOpen(false);
+      formRef.current?.reset();
     }
   }, [state, toast]);
 
@@ -60,7 +63,7 @@ export function PostJobDialog() {
             Fill out the details below to post a new job.
           </DialogDescription>
         </DialogHeader>
-        <form action={formAction}>
+        <form action={formAction} ref={formRef}>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="title" className="text-right">
@@ -87,6 +90,17 @@ export function PostJobDialog() {
               <Input id="requiredSkills" name="requiredSkills" className="col-span-3" placeholder="Comma-separated, e.g. React, TypeScript" />
             </div>
           </div>
+          
+           {state?.errors && (
+             <Alert variant="destructive" className="mb-4">
+               <Terminal className="h-4 w-4" />
+               <AlertTitle>Error</AlertTitle>
+               <AlertDescription>
+                 {Object.values(state.errors).flat().join('\n')}
+               </AlertDescription>
+             </Alert>
+            )}
+
           <DialogFooter>
             <SubmitButton />
           </DialogFooter>

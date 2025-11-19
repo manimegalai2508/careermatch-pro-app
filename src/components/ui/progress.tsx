@@ -13,6 +13,8 @@ const progressVariants = cva(
       variant: {
         default: "bg-primary",
         destructive: "bg-destructive",
+        warning: "bg-yellow-500",
+        success: "bg-green-500",
       },
     },
     defaultVariants: {
@@ -46,4 +48,55 @@ const Progress = React.forwardRef<
 ))
 Progress.displayName = ProgressPrimitive.Root.displayName
 
-export { Progress }
+
+interface RadialProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+    value: number;
+    size?: number;
+    strokeWidth?: number;
+}
+
+const RadialProgress = ({ value, size = 100, strokeWidth = 10, className, children, ...props }: RadialProgressProps) => {
+    const radius = (size - strokeWidth) / 2;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (value / 100) * circumference;
+
+    const progressColor = value > 75 ? "hsl(var(--primary))" : value > 50 ? "hsl(var(--chart-3))" : "hsl(var(--destructive))";
+
+    return (
+        <div
+            className={cn("relative flex items-center justify-center", className)}
+            style={{ width: size, height: size }}
+            {...props}
+        >
+            <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="transform -rotate-90">
+                <circle
+                    className="text-muted"
+                    stroke="currentColor"
+                    strokeWidth={strokeWidth}
+                    fill="transparent"
+                    r={radius}
+                    cx={size / 2}
+                    cy={size / 2}
+                />
+                <circle
+                    stroke={progressColor}
+                    strokeWidth={strokeWidth}
+                    fill="transparent"
+                    r={radius}
+                    cx={size / 2}
+                    cy={size / 2}
+                    strokeDasharray={circumference}
+                    strokeDashoffset={offset}
+                    strokeLinecap="round"
+                    className="transition-all duration-500"
+                />
+            </svg>
+            <div className="absolute flex flex-col items-center justify-center">
+              {children}
+            </div>
+        </div>
+    );
+};
+
+
+export { Progress, RadialProgress }
